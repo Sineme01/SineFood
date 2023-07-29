@@ -1,0 +1,31 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "This is a React Learning Course.",
+  "scripts": {
+    "start": "parcel index.htm",
+    "build": "parcel build index.htm",
+    "test": "jest"
+  },
+  "author": "Anand Kumar",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.9.2",
+    "postcss": "^8.4.27",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "emoji-picker-react": "^4.4.10",
+    "formik": "^2.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
+    "react-scripts": "^5.0.1"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
