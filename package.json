@@ -5,7 +5,9 @@
   "scripts": {
     "start": "parcel index.htm",
     "build": "parcel build index.htm",
-    "test": "jest"
+    "test": "jest",
+    "Output Directory": "build",
+    "Development Command": "react-scripts start"
   },
   "author": "Anand Kumar",
   "license": "ISC",
