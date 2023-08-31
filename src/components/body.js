@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
-import { restaurantList, Swiggy_API } from "./config";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { filterData } from "../utils/helper";
+import { filterData, getRestaurants } from "../utils/helper";
+import { useOnline } from "../utils/useOnline";
+import Offline from "./offline"
+import { Swiggy_API } from "../components/config";
+// import offlineImg from "../assets/img/offline.png"
 const Body = () => {
   //In React the below variables are known as state variables.
   const [searchText, setsearchText] = useState(""); //It returns the searchText and setsearchText
@@ -22,23 +25,39 @@ const Body = () => {
   //State Variables
   const [getAllRestaurants, setGetAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
   useEffect(() => {
     //API Call.
-    // getRestaurants();
-    //If I am working at night Swiggy API has not any restaurants so I am using this dummy data.
-    setGetAllRestaurants(restaurantList);
-    setFilteredRestaurants(restaurantList);
+    const data = getRestaurants();
+    setGetAllRestaurants(data);
+    setFilteredRestaurants(data);
+    // getLiveRestaurants();
   }, []);
-
-  async function getRestaurants() {
+  async function getLiveRestaurants() {
     const data = await fetch(Swiggy_API);
     const json = await data.json();
-    setGetAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    //   //replace swiggyData with json once you uncomment above two lines.
+    setGetAllRestaurants(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants);
+    setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants);
   }
+
   //Conditional Rendering
   // If our data is not fetched from API yet then the Shimmer UI will be loaded.
   // If our data is fetched then Restraunts (API) data will be loaded.
+  console.log(getAllRestaurants);
+  console.log(getAllRestaurants?.length);
+
+  // This piece of code will be excuted when we don't have internet access.
+
+  const isOnline = useOnline();//This custom hook will return true if it is online else false.
+
+  if (!isOnline) {
+    return (
+      <>
+        <Offline />
+      </>
+    );
+  }
   return getAllRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
@@ -46,7 +65,7 @@ const Body = () => {
       <div className="p-5 bg-white-100 my-2 mx-96 ">
         <input
           type="text"
-          className="px-2 w-[600] py-1 italic border-2 focus:border-red-900"
+          className="px-2 w-[600] py-1 italic border-2"
           placeholder="Search for restaurant....."
           value={searchText}
           onChange={(e) => {
@@ -69,14 +88,14 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap mx-24">
         {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
-              to={"restaurant/" + restaurant?.data?.id}
-              key={restaurant?.data?.id}
+              to={"restaurant/" + restaurant?.info?.id}
+              key={restaurant?.info?.id}
             >
-              <RestaurantCard {...restaurant?.data} />
+              <RestaurantCard {...restaurant?.info} />
             </Link>
           );
         })}

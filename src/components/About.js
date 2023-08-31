@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import pizza_img from "../assets/img/pizza.jpg";
 import { FastField } from "formik";
+import Profile from "./Profile_class";
 const About = () => {
-  const [isProfile, setIsProfile] = useState(true);
+  const [isProfile, setIsProfile] = useState(false);
   // useEffect(() => {
   //   setIsProfile(true);
   // }, [isProfile===false])
@@ -12,11 +13,15 @@ const About = () => {
     <>
       <div className="">
 
-        {isProfile ? (<Link to="/about/profile">
-          <button className="ml-[675] my-5 bg-purple-500 rounded-md p-[8] hover:bg-green-500 text-white font-bold text-sm" onClick={() => { setIsProfile(false) }}>
+        {isProfile === false ? (
+          <button className="ml-[675] my-5 bg-purple-500 rounded-md p-[8] hover:bg-green-500 text-white font-bold text-sm" onClick={() => { setIsProfile(true) }}>
             See My Profile
           </button>
-        </Link>) : (<Outlet />)}
+        ) : (<><button className="ml-[675] my-5 bg-purple-500 rounded-md p-[8] hover:bg-green-500 text-white font-bold text-sm" onClick={() => { setIsProfile(false) }}>
+          Hide My Profile
+        </button><Profile /></>)}
+        {/* conditional rendering an exapmple of config driven ui */}
+        {/* {isProfile && ()} */}
         <div className="flex flex-wrap">
           <div className="ml-28 mt-24 mb-32">
             <h1 className="text-6xl text-black font-extrabold">Welcome to</h1>

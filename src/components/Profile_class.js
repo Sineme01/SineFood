@@ -25,13 +25,8 @@ class Profile extends React.Component {
   render() {
     return (
       <div >
-        <Link to="/about">
-          <button className="ml-[675] mt-10 bg-purple-500 rounded-md p-[8] hover:bg-green-500 text-white font-bold text-sm">Hide My Profile</button>
-        </Link>
-        {/* <h1>This is Profile Class Based Component Page.</h1> */}
         <div className="ml-28 shadow-lg mr-[900] border-2 p-5 mt-14">
           <h2 className="font-bold text-4xl ml-36">About Me</h2>
-          {/* <h3>Currently this is nested in About Page.</h3> */}
           {/* <h3>Name:- {this.state.userInfo.name}</h3> */}
           {/* <h3>Location:- {this.state.userInfo.location}</h3> */}
           <img src={this.state.userInfo.avatar_url} className="rounded-full shadow-lg w-52 mt-5 ml-32"></img>

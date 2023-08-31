@@ -13,16 +13,16 @@ const RestaurantCard = ({
 }) => {
   // const image = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/ee5f8e06b300efc07c9fe3f4df40dfc4";
   return (
-    <div className="w-72  mx-5 my-5 bg-white-100 rounded-xl hover:border-2 p-2">
+    <div className="w-auto px-2 pt-4 pb-2 m-5 bg-white-100 hover:border-2 rounded-lg">
       {/* <Link to={"/"}> */}
       <img
-        className="object-fill  w-72 h-60   rounded-xl"
+        className="rounded w-80 h-60"
         src={IMG_CND_URL + cloudinaryImageId}
         alt="Restaurant"
       ></img>
       {/* </Link> */}
       <h2 className="font-bold text-lg">{name}</h2>
-      <h3 className="text-xs flex flex-wrap">{cuisines.join(", ")}</h3>
+      <h3 className="text-xs">{cuisines.join(", ")}</h3>
       {/* <h3 className="text-xs">{area}</h3> */}
       <div className="flex flex-wrap">
         {avgRatingString < "3.5" ? (

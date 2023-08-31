@@ -6,7 +6,7 @@ import useRestaurant from "../utils/useRestaurant";
 const RestaurantMenu = () => {
   //Reading dynamic URL params.
   const restaurantId = useParams(); //It returns an object -> {id:"#$@^%&&**^"}
-  const image = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/ee5f8e06b300efc07c9fe3f4df40dfc4";
+  // const image = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/ee5f8e06b300efc07c9fe3f4df40dfc4";
   const [restaurantInfo, resMenu] = useRestaurant(restaurantId); //Self Created hook that lets you to fetch restaurantInfo and resMenu from swiggy's API.
   return resMenu === null ? (
     <Shimmer />
@@ -17,9 +17,9 @@ const RestaurantMenu = () => {
           Restaurant ID{" : "} {restaurantId?.id}
         </h1> */}
         <img
-          // IMG_CND_URL + restaurantInfo?.cloudinaryImageId
+          // 
           className="rounded-xl pl-72 w-[450]"
-          src={image}
+          src={IMG_CND_URL + restaurantInfo?.cloudinaryImageId}
           alt="Restaurant Image"
         />
         <div className="ml-24">
